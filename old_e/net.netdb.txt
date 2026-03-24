@@ -1,0 +1,48 @@
+ShowModule v1.14 (c) 1992 $#%!
+Update by grio 2001 (4 Kick V36)
+and by Darren Coles 2022 for E-vo
+now showing: "net/netdb.m"
+NOTE: don't use this output in your code, use the module instead.
+
+/* cpu: 68000/010+  
+   module format version: 10
+*/
+
+(----) OBJECT protoent
+(   0)   p_name:LONG
+(   4)   p_aliases:LONG
+(   8)   p_proto:WORD
+(----) ENDOBJECT     /* SIZEOF=10 */
+
+(----) OBJECT servent
+(   0)   s_name:LONG
+(   4)   s_aliases:LONG
+(   8)   s_port:WORD
+(  10)   s_proto:LONG
+(----) ENDOBJECT     /* SIZEOF=14 */
+
+(----) OBJECT netent
+(   0)   n_name:LONG
+(   4)   n_aliases:LONG
+(   8)   n_addrtype:WORD
+(  10)   n_net:LONG
+(----) ENDOBJECT     /* SIZEOF=14 */
+
+(----) OBJECT hostent
+(   0)   h_name:LONG
+(   4)   h_aliases:LONG
+(   8)   h_addrtype:LONG
+(  12)   h_length:LONG
+(  16)   h_addr_list:LONG
+(----) ENDOBJECT     /* SIZEOF=20 */
+
+(----) OBJECT namearray
+(   0)   names[15]:ARRAY OF LONG
+(----) ENDOBJECT     /* SIZEOF=60 */
+
+CONST NO_DATA=4,
+      NO_ADDRESS=4,
+      TRY_AGAIN=2,
+      HOST_NOT_FOUND=1,
+      NO_RECOVERY=3
+

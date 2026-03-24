@@ -1,0 +1,71 @@
+ShowModule v1.14 (c) 1992 $#%!
+Update by grio 2001 (4 Kick V36)
+and by Darren Coles 2022 for E-vo
+now showing: "net/in.m"
+NOTE: don't use this output in your code, use the module instead.
+
+/* cpu: 68000/010+  
+   module format version: 9
+*/
+
+/* this module contains 232 bytes of code! */
+
+PROC in_classa(i)
+PROC in_classb(i)
+PROC in_classc(i)
+PROC in_classd(i)
+PROC in_multicast(i)
+PROC in_badclass(i)
+PROC in_experimental(i)
+
+(----) OBJECT ip_opts
+(   0)   ip_dst:LONG
+(   4)   ip_opts[40]:ARRAY OF BYTE
+(----) ENDOBJECT     /* SIZEOF=44 */
+
+(----) OBJECT sockaddr_in
+(   0)   sin_len:BYTE
+(   1)   sin_family:BYTE
+(   2)   sin_port:WORD
+(   4)   sin_addr:LONG
+(   8)   sin_zero[8]:ARRAY OF BYTE
+(----) ENDOBJECT     /* SIZEOF=16 */
+
+CONST IPPROTO_ICMP=1,
+      IPPROTO_EGP=8,
+      IPPROTO_TP=29,
+      IP_TTL=4,
+      IP_OPTIONS=1,
+      IPPROTO_UDP=17,
+      IPPROTO_IP=0,
+      IP_HDRINCL=2,
+      IN_LOOPBACKNET=$7F,
+      IP_RETOPTS=8,
+      IP_RECVRETOPTS=6,
+      IP_RECVOPTS=5,
+      IPPROTO_RAW=$FF,
+      IN_CLASSC_HOST=$FF,
+      IN_CLASSB_HOST=$FFFF,
+      IN_CLASSA_HOST=$FFFFFF,
+      IN_CLASSC_NET=$FFFFFF00,
+      IN_CLASSB_NET=$FFFF0000,
+      IN_CLASSA_NET=$FF000000,
+      IPPROTO_EON=$50,
+      IP_RECVDSTADDR=7,
+      IPPROTO_PUP=12,
+      IPPROTO_GGP=3,
+      INADDR_ANY=0,
+      IN_CLASSC_NSHIFT=8,
+      IN_CLASSB_NSHIFT=16,
+      IN_CLASSA_NSHIFT=4,
+      INADDR_NONE=-1,
+      IP_TOS=3,
+      IPPROTO_IDP=22,
+      IPPORT_USERRESERVED=$1388,
+      IPPORT_RESERVED=$400,
+      INADDR_BROADCAST=-1,
+      IN_CLASSB_MAX=$10000,
+      IN_CLASSA_MAX=$80,
+      IPPROTO_MAX=$100,
+      IPPROTO_TCP=6
+

@@ -1,0 +1,55 @@
+ShowModule v1.14 (c) 1992 $#%!
+Update by grio 2001 (4 Kick V36)
+and by Darren Coles 2022 for E-vo
+now showing: "socket.m"
+NOTE: don't use this output in your code, use the module instead.
+
+LIBRARY socket         /* informal notation */
+  Socket(D0,D1,D2)     /* -30 (1E) */
+  Bind(D0,A0,D1)     /* -36 (24) */
+  Listen(D0,D1)     /* -42 (2A) */
+  Accept(D0,A0,A1)     /* -48 (30) */
+  Connect(D0,A0,D1)     /* -54 (36) */
+  SendTo(D0,A0,D1,D2,A1,D3)     /* -60 (3C) */
+  Send(D0,A0,D1,D2)     /* -66 (42) */
+  RecvFrom(D0,A0,D1,D2,A1,A2)     /* -72 (48) */
+  Recv(D0,A0,D1,D2)     /* -78 (4E) */
+  Shutdown(D0,D1)     /* -84 (54) */
+  SetSockOpt(D0,D1,D2,A0,D3)     /* -90 (5A) */
+  GetSockOpt(D0,D1,D2,A0,A1)     /* -96 (60) */
+  GetSockName(D0,A0,A1)     /* -102 (66) */
+  GetPeerName(D0,A0,A1)     /* -108 (6C) */
+  IoctlSocket(D0,D1,A0)     /* -114 (72) */
+  CloseSocket(D0)     /* -120 (78) */
+  WaitSelect(D0,A0,A1,A2,A3,D1)     /* -126 (7E) */
+  SetSocketSignals(D0,D1,D2)     /* -132 (84) */
+  GetDTableSize()     /* -138 (8A) */
+  ObtainSocket(D0,D1,D2,D3)     /* -144 (90) */
+  ReleaseSocket(D0,D1)     /* -150 (96) */
+  ReleaseCopyOfSocket(D0,D1)     /* -156 (9C) */
+  Errno()     /* -162 (A2) */
+  SetErrnoPtr(A0,D0)     /* -168 (A8) */
+  Inet_NtoA(D0)     /* -174 (AE) */
+  Inet_Addr(A0)     /* -180 (B4) */
+  Inet_LnaOf(D0)     /* -186 (BA) */
+  Inet_NetOf(D0)     /* -192 (C0) */
+  Inet_MakeAddr(D0,D1)     /* -198 (C6) */
+  Inet_Network(A0)     /* -204 (CC) */
+  GetHostByName(A0)     /* -210 (D2) */
+  GetHostByAddr(A0,D0,D1)     /* -216 (D8) */
+  GetNetByName(A0)     /* -222 (DE) */
+  GetNetByAddr(D0,D1)     /* -228 (E4) */
+  GetServByName(A0,A1)     /* -234 (EA) */
+  GetServByPort(D0,A0)     /* -240 (F0) */
+  GetProtoByName(A0)     /* -246 (F6) */
+  GetProtoByNumber(D0)     /* -252 (FC) */
+  SyslogA(D0,A0,A1)     /* -258 (102) */
+  Dup2Socket(D0,D1)     /* -264 (108) */
+  SendMsg(D0,A0,D1)     /* -270 (10E) */
+  RecvMsg(D0,A0,D1)     /* -276 (114) */
+  GetHostName(A0,D0)     /* -282 (11A) */
+  GetHostId()     /* -288 (120) */
+  SocketBaseTagList(A0)     /* -294 (126) */
+  GetSocketEvents(A0)     /* -300 (12C) */
+ENDLIBRARY
+

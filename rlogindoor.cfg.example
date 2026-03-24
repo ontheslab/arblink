@@ -1,0 +1,22 @@
+# arblink beta test configuration example
+# host may be either an IP address or a domain name
+host=doors.example.com
+port=513
+
+# Keep remote_user blank so the live caller name, with prefix added,
+# is what gets sent to the shared rlogin service.
+username_prefix=V4S
+remote_user=
+
+terminal_type=ansi
+terminal_speed=19200
+terminal_columns=80
+terminal_rows=24
+newline_mode=crlf
+
+# Keep logging on during beta testing.
+debug_enabled=1
+debug_log=RAM:arblink.log
+
+# Prevent AmiExpress pause prompts during full-screen remote output.
+disable_paging=1

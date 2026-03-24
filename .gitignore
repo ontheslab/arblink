@@ -1,0 +1,12 @@
+# Compiled Amiga binaries
+arblink
+rlogincli
+
+# Runtime logs
+*.log
+
+# Archived binaries and retired files
+archive/
+
+# Stock Amiga E module library — not project-specific
+old_e/Modules/
