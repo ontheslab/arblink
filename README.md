@@ -13,7 +13,7 @@ the same shared transport layer (work in progress).
 | Component | Status |
 |---|---|
 | `arblink` door | Working — validated under live AmiExpress/WinUAE testing |
-| `rlogincli` CLI client | Partial — connects and shows remote output; no local console input |
+| `rlogincli` CLI client | Partial — connects and shows remote output; **no local console input** |
 
 ### Background
 
@@ -43,7 +43,7 @@ build.bat
 | Output | Source | Purpose |
 |---|---|---|
 | `arblink` | `rlogindoor.c` + modules | AmiExpress door binary |
-| `rlogincli` | `rlogincli.c` + shared transport | Standalone CLI rlogin client |
+| `rlogincli` | `rlogincli.c` + shared transport | Standalone CLI rlogin client - **Not Working** |
 
 The build script requires vbcc (`vc`) on the system PATH and the local AmigaOS
 include trees at:
@@ -71,8 +71,8 @@ Copy `rlogindoor.cfg.example` to `rlogindoor.cfg` and edit as needed.
 |---|---|---|
 | `host` | — | Remote rlogin server hostname or IP |
 | `port` | `513` | Remote port (`login` is accepted as an alias for `513`) |
-| `username_prefix` | — | Prefix prepended to the caller name before sending |
-| `remote_user` | — | Override remote user name; leave blank to use the prefixed caller name |
+| `username_prefix` | — | Prefix prepended to the caller name before sending — see note below |
+| `remote_user` | — | Override remote user name entirely; leave blank to use the prefixed caller name |
 | `terminal_type` | `ansi` | Terminal type sent in the rlogin handshake |
 | `terminal_speed` | `19200` | Terminal speed sent in the handshake |
 | `terminal_columns` | `80` | Terminal width |
@@ -80,6 +80,12 @@ Copy `rlogindoor.cfg.example` to `rlogindoor.cfg` and edit as needed.
 | `disable_paging` | `0` | Set to `1` to suppress AmiExpress paging prompts during the session |
 | `debug_enabled` | `0` | Set to `1` to enable file-based debug logging |
 | `debug_log` | `rlogindoor.log` | Log file path (e.g. `RAM:arblink.log`) |
+
+**Username prefix note:** The prefix is designed for shared multi-BBS door server
+setups where multiple BBS systems connect to the same remote door server. The prefix
+acts as a unique tag per BBS so the server can distinguish callers across systems.
+For example, with `username_prefix=V4S`, a caller named `Alex` is sent to the remote
+server as `V4SAlex`.
 
 ---
 
