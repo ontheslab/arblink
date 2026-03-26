@@ -10,3 +10,5 @@ archive/
 
 # Stock Amiga E module library — not project-specific
 old_e/Modules/
+
+archive.ps1
