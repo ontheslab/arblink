@@ -196,7 +196,7 @@ int main(int argc, char **argv)
     return 10;
   }
 
-  cli_write_text_to(output_handle, "RLogin Door CLI " RLOGINDOOR_VERSION "\r\n");
+  cli_write_text_to(output_handle, "RLogin CLI " RLOGINCLI_VERSION "\r\n");
 
   host_name = argv[1];
   if (cli_parse_port_text(argv[2], &port_number) != 0) {
@@ -208,7 +208,7 @@ int main(int argc, char **argv)
 
   if (doorlog_open(&log, "RAM:rlogincli.log", 1) == 0) {
     log_opened = 1;
-    doorlog_writef(&log, "CLI version %s", RLOGINDOOR_VERSION);
+    doorlog_writef(&log, "CLI version %s", RLOGINCLI_VERSION);
     doorlog_writef(&log, "CLI start host %s port %u user %s terminal %s",
                    host_name,
                    (unsigned int) port_number,
@@ -222,6 +222,8 @@ int main(int argc, char **argv)
                    (long) input_handle,
                    (long) output_handle,
                    (long) console_port);
+    doorlog_writef(&log, "Input handle interactive: %s",
+                   IsInteractive(input_handle) ? "yes" : "no");
   }
 
   error_text[0] = '\0';
@@ -267,8 +269,8 @@ int main(int argc, char **argv)
       break;
     }
 
-    chars_waiting = WaitForChar(input_handle, 1);
-    while (chars_waiting > 0) {
+    chars_waiting = WaitForChar(input_handle, 0);
+    while (chars_waiting != 0) {
       if (Read(input_handle, &input_char, 1) != 1) {
         if (log_opened) {
           doorlog_write(&log, "Active input handle read returned no byte.");
@@ -304,7 +306,7 @@ int main(int argc, char **argv)
         return 30;
       }
 
-      chars_waiting = WaitForChar(input_handle, 1);
+      chars_waiting = WaitForChar(input_handle, 0);
     }
 
     Delay(1);

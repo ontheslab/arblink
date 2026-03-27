@@ -1,7 +1,10 @@
 #ifndef DOOR_VERSION_H
 #define DOOR_VERSION_H
 
-/* Locked beta version for the first working C door release. */
+/* AmiExpress door version. */
 #define RLOGINDOOR_VERSION "1.34.01"
+
+/* Standalone CLI client version -- tracked separately from the door. */
+#define RLOGINCLI_VERSION "1.16.01"
 
 #endif
