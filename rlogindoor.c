@@ -26,8 +26,10 @@
 static int load_config_with_fallbacks(const char **used_path, const char *requested_path, struct door_config *config, char *error_text, int error_text_size)
 {
   static const char *default_paths[] = {
-    "PROGDIR:rlogindoor.cfg",
-    "rlogindoor.cfg"
+    "PROGDIR:arblink.cfg",
+    "arblink.cfg",
+    "PROGDIR:rlogindoor.cfg",  /* legacy name -- accepted for backward compatibility */
+    "rlogindoor.cfg"           /* legacy name -- accepted for backward compatibility */
   };
   int status;
   int index;
@@ -94,7 +96,7 @@ int main(int argc, char **argv)
   } else if ((argc > 1) && path_looks_like_config(argv[1])) {
     requested_config_path = argv[1];
   }
-  config_path = requested_config_path != NULL ? requested_config_path : "PROGDIR:rlogindoor.cfg";
+  config_path = requested_config_path != NULL ? requested_config_path : "PROGDIR:arblink.cfg";
 
   memset(&door, 0, sizeof(door));
   memset(&log, 0, sizeof(log));

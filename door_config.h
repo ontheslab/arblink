@@ -1,7 +1,7 @@
 #ifndef DOOR_CONFIG_H
 #define DOOR_CONFIG_H
 
-/* Parsed runtime settings loaded from rlogindoor.cfg. */
+/* Parsed runtime settings loaded from arblink.cfg. */
 struct door_config {
   char host[128];
   unsigned short port;

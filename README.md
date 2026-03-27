@@ -58,14 +58,14 @@ C:\amiga-dev\targets\m68k-amigaos\posix\include
 ## Installation
 
 Copy `arblink` to the "DOORS" location on the Amiga and set it as an XIM command
-in AmiExpress. Place `rlogindoor.cfg` in the same drawer (`PROGDIR:`).
+in AmiExpress. Place `arblink.cfg` in the same drawer (`PROGDIR:`).
 Create an appropriate ".info" file in your "COMMANDS" folder to launch it.
 
 ---
 
 ## Configuration
 
-Copy `rlogindoor.cfg.example` to `rlogindoor.cfg` and edit as needed.
+Copy `arblink.cfg.example` to `arblink.cfg` and edit as needed.
 
 | Key | Default | Description |
 |---|---|---|
