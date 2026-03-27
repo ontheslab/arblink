@@ -5,6 +5,6 @@
 #define ARBLINK_VERSION "1.34.02"
 
 /* Standalone rlogin CLI client version -- tracked separately from the door. */
-#define RLOGIN_VERSION "1.16.02"
+#define RLOGIN_VERSION "1.16.03"
 
 #endif

@@ -1,6 +1,6 @@
 # Compiled Amiga binaries
 arblink
-rlogincli
+rlogin
 
 # Runtime logs
 *.log

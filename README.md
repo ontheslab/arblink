@@ -131,5 +131,5 @@ AI assistance (Claude, Anthropic) was used during development for:
 
 ## Version
 
-`arblink 1.34.02` / `rlogin 1.16.02` — source files renamed to match the binary names
+`arblink 1.34.02` / `rlogin 1.16.03` — source files renamed to match the binary names
 throughout. Config renamed to `arblink.cfg`; legacy `rlogindoor.cfg` still accepted.

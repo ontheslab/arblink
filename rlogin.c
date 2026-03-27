@@ -169,6 +169,7 @@ int main(int argc, char **argv)
   const char *host_name;
   const char *user_name;
   const char *terminal_name;
+  const char *debug_log_path;
   BPTR input_handle;
   BPTR output_handle;
   struct MsgPort *console_port;
@@ -179,6 +180,9 @@ int main(int argc, char **argv)
   unsigned char input_char;
   int shell_input_raw_enabled;
   int log_opened;
+  int debug_enabled;
+  int terminal_set;
+  int arg_index;
 
   input_handle = Input();
   output_handle = Output();
@@ -188,7 +192,7 @@ int main(int argc, char **argv)
   memset(&log, 0, sizeof(log));
 
   if (argc < 4) {
-    cli_write_text_to(output_handle, "Usage: rlogin <host> <port|login> <user> [terminal]\n");
+    cli_write_text_to(output_handle, "Usage: rlogin <host> <port|login> <user> [terminal] [-debug [logpath]]\n");
     return 10;
   }
 
@@ -200,9 +204,29 @@ int main(int argc, char **argv)
     return 10;
   }
   user_name = argv[3];
-  terminal_name = (argc > 4) ? argv[4] : "ansi";
 
-  if (doorlog_open(&log, "RAM:rlogin.log", 1) == 0) {
+  /* Scan optional arguments: first positional is terminal, -debug enables logging. */
+  terminal_name = "ansi";
+  debug_log_path = "RAM:rlogin.log";
+  debug_enabled = 0;
+  terminal_set = 0;
+  for (arg_index = 4; arg_index < argc; arg_index++) {
+    if (argv[arg_index] == NULL) {
+      continue;
+    }
+    if (strcmp(argv[arg_index], "-debug") == 0) {
+      debug_enabled = 1;
+      if ((arg_index + 1 < argc) && (argv[arg_index + 1] != NULL) && (argv[arg_index + 1][0] != '-')) {
+        arg_index++;
+        debug_log_path = argv[arg_index];
+      }
+    } else if (!terminal_set) {
+      terminal_name = argv[arg_index];
+      terminal_set = 1;
+    }
+  }
+
+  if (debug_enabled && (doorlog_open(&log, debug_log_path, 1) == 0)) {
     log_opened = 1;
     doorlog_writef(&log, "CLI version %s", RLOGIN_VERSION);
     doorlog_writef(&log, "CLI start host %s port %u user %s terminal %s",
