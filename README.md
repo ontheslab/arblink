@@ -4,7 +4,7 @@ An AmiExpress BBS door that bridges a caller to an external door server over the
 `rlogin` protocol. Written in C and cross-compiled on Windows for m68k-AmigaOS.
 
 A standalone command-line rlogin client (`rlogin`) is also included, built from
-the same shared transport layer (work in progress).
+the same shared transport layer.
 
 ---
 

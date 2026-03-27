@@ -1,5 +1,5 @@
 /*
- * Live terminal session pump for arblink.
+ * Live terminal session bridge for arblink.
  *
  * The job here is to keep the BBS caller side and the remote rlogin socket
  * moving together without blocking either side for long.
@@ -297,7 +297,7 @@ int terminal_session_run(const struct door_config *config, struct aedoor_context
   SocketLibIoctl(connection->socket_fd, FIONBIO, (char *) &nonblocking_mode);
   aedoor_set_cursor(door, 1);
 
-  /* This line is useful during beta testing, but can be revisited later. */
+  /* Notify the caller that the remote connection is up. */
   aedoor_write_line(door, "Connected to remote rlogin service.");
 
   if (config->debug_enabled) {
