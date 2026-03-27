@@ -11,5 +11,6 @@ release/
 
 # Stock Amiga E module library — not project-specific
 old_e/Modules/
+old_e/rlogin_e/
 
 archive.ps1
