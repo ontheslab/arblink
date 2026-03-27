@@ -71,7 +71,7 @@ int doorlog_open(struct doorlog *log, const char *path, int enabled)
     log->path[sizeof(log->path) - 1U] = '\0';
   }
   if (handle == 0) {
-    fallback_path = "T:rlogindoor.log";
+    fallback_path = "T:arblink.log";
     handle = doorlog_open_path(fallback_path);
     if (handle != 0) {
       strncpy(log->path, fallback_path, sizeof(log->path) - 1U);
@@ -79,7 +79,7 @@ int doorlog_open(struct doorlog *log, const char *path, int enabled)
     }
   }
   if (handle == 0) {
-    fallback_path = "rlogindoor.log";
+    fallback_path = "arblink.log";
     handle = doorlog_open_path(fallback_path);
     if (handle != 0) {
       strncpy(log->path, fallback_path, sizeof(log->path) - 1U);

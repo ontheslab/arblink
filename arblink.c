@@ -113,7 +113,7 @@ int main(int argc, char **argv)
   if (doorlog_open(&log, config.debug_log, config.debug_enabled) != 0) {
     printf("Log warning: could not open %s\n", config.debug_log);
   } else if (config.debug_enabled) {
-    doorlog_writef(&log, "Door version %s", RLOGINDOOR_VERSION);
+    doorlog_writef(&log, "Door version %s", ARBLINK_VERSION);
     doorlog_writef(&log, "Door start with config %s", config_path);
     if ((argc > 1) && (argv[1] != NULL)) {
       doorlog_writef(&log, "argv[1]=%s", argv[1]);
@@ -135,7 +135,7 @@ int main(int argc, char **argv)
     doorlog_close(&log);
     return 10;
   }
-  aedoor_write_line(&door, "RLogin Door " RLOGINDOOR_VERSION);
+  aedoor_write_line(&door, "RLogin Door " ARBLINK_VERSION);
   doorlog_write(&log, "AEDoor opened.");
 
   status = aedoor_fetch_username(&door, &config, error_text, (int) sizeof(error_text));

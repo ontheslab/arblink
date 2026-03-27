@@ -1,12 +1,8 @@
 /*
- * Standalone rlogin CLI test client.
+ * rlogin -- standalone rlogin CLI client.
  *
- * This is intentionally separate from the door so the transport can be tested
- * outside AmiExpress. It is still a side project, not the main supported path.
- *
- * Important gotcha:
- * the current unresolved issue is local console input handling under the
- * tested shell environment, even though the remote socket side is working.
+ * Intentionally separate from the door so the transport can be tested
+ * outside AmiExpress. Shares the rlogin_client transport layer with arblink.
  */
 #include "rlogin_client.h"
 #include "doorlog.h"
@@ -192,11 +188,11 @@ int main(int argc, char **argv)
   memset(&log, 0, sizeof(log));
 
   if (argc < 4) {
-    cli_write_text_to(output_handle, "Usage: rlogincli <host> <port|login> <user> [terminal]\n");
+    cli_write_text_to(output_handle, "Usage: rlogin <host> <port|login> <user> [terminal]\n");
     return 10;
   }
 
-  cli_write_text_to(output_handle, "RLogin CLI " RLOGINCLI_VERSION "\r\n");
+  cli_write_text_to(output_handle, "RLogin CLI " RLOGIN_VERSION "\r\n");
 
   host_name = argv[1];
   if (cli_parse_port_text(argv[2], &port_number) != 0) {
@@ -206,9 +202,9 @@ int main(int argc, char **argv)
   user_name = argv[3];
   terminal_name = (argc > 4) ? argv[4] : "ansi";
 
-  if (doorlog_open(&log, "RAM:rlogincli.log", 1) == 0) {
+  if (doorlog_open(&log, "RAM:rlogin.log", 1) == 0) {
     log_opened = 1;
-    doorlog_writef(&log, "CLI version %s", RLOGINCLI_VERSION);
+    doorlog_writef(&log, "CLI version %s", RLOGIN_VERSION);
     doorlog_writef(&log, "CLI start host %s port %u user %s terminal %s",
                    host_name,
                    (unsigned int) port_number,

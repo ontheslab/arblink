@@ -118,7 +118,7 @@ static void config_apply_bounds(struct door_config *config)
     strcpy(config->newline_mode, "crlf");
   }
   if (config->debug_log[0] == '\0') {
-    strcpy(config->debug_log, "rlogindoor.log");
+    strcpy(config->debug_log, "arblink.log");
   }
 }
 
@@ -138,7 +138,7 @@ void config_set_defaults(struct door_config *config)
   config->terminal_columns = 80;
   config->terminal_rows = 24;
   strcpy(config->newline_mode, "crlf");
-  strcpy(config->debug_log, "RAM:rlogindoor.log");
+  strcpy(config->debug_log, "RAM:arblink.log");
   config->debug_enabled = 1;
   config->disable_paging = 1;
 }

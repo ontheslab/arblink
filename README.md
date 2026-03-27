@@ -3,7 +3,7 @@
 An AmiExpress BBS door that bridges a caller to an external door server over the
 `rlogin` protocol. Written in C and cross-compiled on Windows for m68k-AmigaOS.
 
-A standalone command-line rlogin client (`rlogincli`) is also included, built from
+A standalone command-line rlogin client (`rlogin`) is also included, built from
 the same shared transport layer (work in progress).
 
 ---
@@ -13,7 +13,7 @@ the same shared transport layer (work in progress).
 | Component | Status |
 |---|---|
 | `arblink` door | Working — validated under live AmiExpress/WinUAE testing |
-| `rlogincli` CLI client | Partial — connects and shows remote output; **no local console input** |
+| `rlogin` CLI client | Working — console input confirmed on hardware |
 
 ### Background
 
@@ -42,8 +42,8 @@ build.bat
 
 | Output | Source | Purpose |
 |---|---|---|
-| `arblink` | `rlogindoor.c` + modules | AmiExpress door binary |
-| `rlogincli` | `rlogincli.c` + shared transport | Standalone CLI rlogin client - **Not Working** |
+| `arblink` | `arblink.c` + modules | AmiExpress door binary |
+| `rlogin` | `rlogin.c` + shared transport | Standalone CLI rlogin client |
 
 The build script requires vbcc (`vc`) on the system PATH and the local AmigaOS
 include trees at:
@@ -79,7 +79,7 @@ Copy `arblink.cfg.example` to `arblink.cfg` and edit as needed.
 | `terminal_rows` | `24` | Terminal height |
 | `disable_paging` | `0` | Set to `1` to suppress AmiExpress paging prompts during the session |
 | `debug_enabled` | `0` | Set to `1` to enable file-based debug logging |
-| `debug_log` | `rlogindoor.log` | Log file path (e.g. `RAM:arblink.log`) |
+| `debug_log` | `arblink.log` | Log file path (e.g. `RAM:arblink.log`) |
 
 **Username prefix note:** The prefix is designed for shared multi-BBS door server
 setups where multiple BBS systems connect to the same remote door server. The prefix
@@ -93,16 +93,16 @@ server as `V4SAlex`.
 
 | File | Responsibility |
 |---|---|
-| `rlogindoor.c` | Top-level control flow: load config, open AEDoor, connect, run the live session, restore |
+| `arblink.c` | Top-level control flow: load config, open AEDoor, connect, run the live session, restore |
 | `door_config.c/.h` | `key=value` config loader |
 | `aedoor_bridge.c/.h` | AEDoor library lifecycle, caller identity, paging suppression, key polling |
 | `rlogin_client.c/.h` | Shared rlogin socket transport: resolve, connect, handshake |
 | `terminal_session.c/.h` | Live caller-to-remote and remote-to-caller bridge loop |
-| `rlogincli.c` | Standalone CLI client using the same transport layer |
+| `rlogin.c` | Standalone CLI client using the same transport layer |
 | `doorlog.c/.h` | File-based debug logging |
 | `aedoor_inline.h` | Local AEDoor inline stubs |
 | `socket_inline_local.h` | Local socket inline wrapper |
-| `door_version.h` | Single `RLOGINDOOR_VERSION` string |
+| `door_version.h` | Version strings for both `arblink` and `rlogin` |
 
 ---
 
@@ -124,12 +124,12 @@ AI assistance (Claude, Anthropic) was used during development for:
 
 - Diagnosing the unresolved issues in the original E prototype — in particular the blocking
   `HotKey()` call, the unsafe handshake buffer, and inconsistent socket library ownership
-- Proposing and extraction of `rlogincli` as a standalone side project
+- Proposing and extraction of `rlogin` as a standalone side project
   built from the shared transport layer
 
 ---
 
 ## Version
 
-`1.34.01` — major line 1, build number carries forward from the last E prototype (34),
-`.01` is the first working C build.
+`arblink 1.34.02` / `rlogin 1.16.02` — source files renamed to match the binary names
+throughout. Config renamed to `arblink.cfg`; legacy `rlogindoor.cfg` still accepted.

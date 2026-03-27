@@ -2,9 +2,9 @@
 #define DOOR_VERSION_H
 
 /* AmiExpress door version. */
-#define RLOGINDOOR_VERSION "1.34.01"
+#define ARBLINK_VERSION "1.34.02"
 
-/* Standalone CLI client version -- tracked separately from the door. */
-#define RLOGINCLI_VERSION "1.16.01"
+/* Standalone rlogin CLI client version -- tracked separately from the door. */
+#define RLOGIN_VERSION "1.16.02"
 
 #endif
