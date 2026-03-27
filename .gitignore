@@ -2,6 +2,10 @@
 arblink
 rlogin
 
+# Live config (contains site-specific settings)
+arblink.cfg
+rlogindoor.cfg
+
 # Runtime logs
 *.log
 
