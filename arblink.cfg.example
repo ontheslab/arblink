@@ -1,4 +1,4 @@
-# arblink beta test configuration example
+# arblink configuration example
 # host may be either an IP address or a domain name
 host=doors.example.com
 port=513
@@ -14,8 +14,8 @@ terminal_columns=80
 terminal_rows=24
 newline_mode=crlf
 
-# Keep logging on during beta testing.
-debug_enabled=1
+# Set debug_enabled=1 to write a log useful for fault finding.
+debug_enabled=0
 debug_log=RAM:arblink.log
 
 # Prevent AmiExpress pause prompts during full-screen remote output.

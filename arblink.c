@@ -5,7 +5,7 @@
  * - load configuration with safe fallbacks
  * - open AEDoor and fetch the caller identity
  * - connect to the remote rlogin service
- * - hand the live session over to the terminal pump
+ * - hand off the live session to the terminal bridge loop
  * - restore local state on every exit path
  *
  * Important gotcha:
@@ -184,7 +184,7 @@ int main(int argc, char **argv)
                  door.username,
                  connection.remote_user);
 
-  /* The terminal pump owns all live caller and remote traffic from here. */
+  /* The terminal bridge loop handles all live caller and remote traffic from here. */
   status = terminal_session_run(&config, &door, &connection, &log, error_text, (int) sizeof(error_text));
   if (status != 0) {
     doorlog_writef(&log, "Terminal session failed: %s", error_text);
