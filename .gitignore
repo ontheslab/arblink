@@ -18,4 +18,5 @@ old_e/Modules/
 old_e/rlogin_e/
 
 archive.ps1
+make_release.ps1
 xfer*.bat
