@@ -1,0 +1,71 @@
+ArbLink v1.34.02 — AmiExpress rlogin Door
+=========================================
+
+Requirements
+------------
+
+  - AmiExpress BBS with AEDoor available
+  - A TCP stack with bsdsocket.library (e.g. AmiTCP, Miami, Roadshow)
+
+
+Installation
+------------
+
+1. Copy the "arblink" binary to your AmiExpress doors location.
+
+2. Copy "arblink.cfg.example" to the same drawer and rename it
+   to "arblink.cfg".
+
+3. Edit "arblink.cfg" with a text editor and set at minimum:
+
+     host=<your rlogin server address>
+     port=513
+     username_prefix=<your prefix, or leave blank>
+
+4. In AmiExpress, add an XIM door entry pointing to the arblink binary.
+   Set the LOCATION tooltype in the door's .info file to the full path
+   of the arblink binary.
+
+   ArbLink will look for arblink.cfg in PROGDIR: (the same drawer
+   as the binary) automatically. If you have an existing install with
+   rlogindoor.cfg that name is still accepted.
+
+
+Configuration Reference
+-----------------------
+
+  host             Remote rlogin server hostname or IP address
+  port             Remote port. Use 513 or the word "login" (default: 513)
+  username_prefix  Prefix added to the caller name before sending to the
+                   remote server (e.g. "V4S"). Leave blank if not needed.
+                   For shared multi-BBS door server setups, multiple BBS systems
+                   can connect to the same remote door server and the prefix acts
+                   as a unique tag per BBS. Example: username "Alex" with prefix
+                   "V4S" is sent to the server as "V4SAlex".
+  remote_user      Override the remote login name entirely. Leave blank to
+                   use the caller name with prefix applied.
+  terminal_type    Terminal type sent in the rlogin handshake (default: ansi)
+  terminal_speed   Baud rate sent in the handshake (default: 19200)
+  terminal_columns Screen width (default: 80)
+  terminal_rows    Screen height (default: 24)
+  disable_paging   Set to 1 to suppress AmiExpress paging during the session
+  debug_enabled    Set to 1 to write a runtime log (useful for fault finding)
+  debug_log        Log file path (e.g. RAM:arblink.log)
+
+
+Troubleshooting
+---------------
+
+  Enable logging in the config:
+
+    debug_enabled=1
+    debug_log=RAM:arblink.log
+
+  Then run the door and check RAM:arblink.log for connection and
+  session details.
+
+
+Source and Updates
+------------------
+
+  https://github.com/ontheslab/arblink
