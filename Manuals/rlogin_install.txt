@@ -1,0 +1,97 @@
+rlogin v1.16.03 — Standalone rlogin CLI Client
+===============================================
+
+rlogin is a small standalone rlogin client for AmigaOS. It connects to any
+rlogin server (port 513) directly from a shell.
+
+
+Requirements
+------------
+
+  - AmigaOS 2.0 or later
+  - A TCP stack with bsdsocket.library (e.g. AmiTCP, Miami, Roadshow)
+  - A shell (tested under Coffin OS csh and standard AmigaDOS Shell)
+
+
+Installation
+------------
+
+Copy the "rlogin" binary anywhere on your system, e.g. C: so it is on
+the default command path.
+
+No config file is needed. All options are passed on the command line.
+
+
+Usage
+-----
+
+  rlogin <host> <port|login> <user> [terminal] [-debug [logpath]]
+
+  host       Hostname or IP address of the rlogin server
+  port       Port number, or the word "login" as an alias for 513
+  user       Username to send in the rlogin handshake
+  terminal   Terminal type string (default: ansi)
+  -debug     Enable debug logging (default: off)
+  logpath    Log file path to use with -debug (default: RAM:rlogin.log)
+
+
+Examples
+--------
+
+  Connect to a BBS server on the default rlogin port:
+
+    rlogin bbs.example.com login Alex
+
+  Connect with a specific terminal type and port:
+
+    rlogin 192.168.0.63 513 Alex ansi
+
+  Connect with debug logging to the default log file:
+
+    rlogin bbs.example.com login Alex ansi -debug
+
+  Connect with debug logging to a custom log file:
+
+    rlogin bbs.example.com login Alex ansi -debug RAM:mylog.log
+
+
+Notes
+-----
+
+  - Press Ctrl-C to end the session and return to the shell.
+
+  - The client puts the shell console into raw mode on connect so
+    each keypress is sent immediately without needing to press Enter.
+    Console mode is restored cleanly on exit.
+
+  - Tested under Coffin OS (csh) and confirmed working. Both the
+    raw console mode and keypress forwarding are fully functional.
+
+  - The terminal type sent in the handshake affects how the remote
+    server handles colour and cursor sequences. Use "ansi" unless
+    the server requires something specific.
+
+  - rlogin sends a baud rate of 19200 in the handshake, which suits
+    most rlogin servers.
+
+
+Troubleshooting
+---------------
+
+  Run with -debug to write a log:
+
+    rlogin bbs.example.com login Alex -debug
+
+  Then check RAM:rlogin.log for connection details and key events.
+
+  Key lines to look for:
+    Input handle interactive: yes    -- console handle is valid
+    Live shell console input switched to raw mode.  -- raw mode active
+    Shell key 0x..                   -- keystrokes reaching the client
+
+
+Source and Updates
+------------------
+
+  https://github.com/ontheslab/arblink
+
